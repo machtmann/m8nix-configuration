@@ -82,6 +82,7 @@ in {
     # Applications
     blender
     keepassxc
+    readest
     vesktop
 
     # Rice
