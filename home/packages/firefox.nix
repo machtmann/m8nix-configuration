@@ -1,6 +1,4 @@
-{ inputs, config, pkgs, ... }: {
-
-  imports = [];
+{ inputs, pkgs, ... }: {
 
   programs = {
     firefox = {
@@ -16,18 +14,21 @@
               "browser.search.defaultenginename" = "Google";
               "browser.search.order.1" = "Google";
             };
-            bookmarks = [
-            #{
-            #  name = "";
-            #  tags = "";
-            #  keyword = "";
-            #  url = "";
-            #}
-            ];
+            bookmarks = {
+              force = true;
+              settings = [
+                # {
+                #   name = "";
+                #   tags = "";
+                #   keyword = "";
+                #   url = "";
+                # }
+              ];
+            };
             search = {
               force = true;
-              default = "Google";
-              order = [ "Google" ];
+              default = "google";
+              order = [ "google" ];
               engines = {
                 "Nix Packages" = {
                   urls = [{
@@ -42,13 +43,13 @@
                 };
                 "MyNixOS" = {
                   urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
-                  iconUpdateURL = "https://mynixos.com/icon.svg";
+                  icon = "https://mynixos.com/icon.svg";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = [ "@nw" ];
                 };
                 "NixOS Wiki" = {
                   urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
-                  iconUpdateURL = "https://nixos.wiki/favicon.png";
+                  icon = "https://nixos.wiki/favicon.png";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = [ "@nw" ];
                 };
@@ -57,7 +58,7 @@
             };
 
             # lookup available extensions here https://nur.nix-community.org/repos/
-            extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+            extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
               darkreader
               keepassxc-browser
               ublock-origin
