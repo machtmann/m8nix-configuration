@@ -67,6 +67,13 @@ in {
     fish.enable = true;
     hyprland.enable = true;
     hyprlock.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -94,7 +101,6 @@ in {
     neovim
     starship
     wget
-    xfce.thunar
 
     app2unit
     cliphist

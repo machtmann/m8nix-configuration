@@ -5,6 +5,8 @@
   ];
 
   home.sessionVariables = {
+    CONTAINER_RUNTIME = "containerd";
+    DRIVER = "podman";
     EDITOR = "nvim";
     WINIT_UNIX_BACKEND = "wayland";
   };
