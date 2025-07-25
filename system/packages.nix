@@ -13,15 +13,18 @@ in {
     keepassxc
     readest
     signal-desktop
-    vesktop
+    steam
+    discord
 
     # Rice
     tokyo-night-sddm
+    starship
 
     # Tools
     alsa-lib
     caelestia-cli
     cliphist
+    devenv
     eza
     fastfetch
     fish
@@ -33,7 +36,6 @@ in {
     nh
     nix-output-monitor
     secretspec
-    starship
     wget
 
     app2unit
