@@ -14,6 +14,8 @@
     plymouth.enable = true;
   };
 
+  fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
+
   home-manager = { users.m8man = import ./home/home.nix; };
 
   i18n.defaultLocale = "en_US.UTF-8";
