@@ -13,7 +13,6 @@ in {
     keepassxc
     readest
     signal-desktop
-    steam
     discord
 
     # Rice
@@ -51,11 +50,18 @@ in {
     wl-clipboard
     wl-screenrec
   ];
+
   programs = {
     firefox.enable = true;
     fish.enable = true;
     hyprland.enable = true;
     hyprlock.enable = true;
+    steam = {
+      enable = true;
+      dedicatedServer.openFirewall = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+    };
     thunar = {
       enable = true;
       plugins = with pkgs.xfce; [
