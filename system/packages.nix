@@ -51,4 +51,17 @@ in {
     wl-clipboard
     wl-screenrec
   ];
+  programs = {
+    firefox.enable = true;
+    fish.enable = true;
+    hyprland.enable = true;
+    hyprlock.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
+  };
 }

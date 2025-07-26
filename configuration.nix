@@ -62,20 +62,6 @@
     packages = with pkgs; [ tree ];
   };
 
-  programs = {
-    firefox.enable = true;
-    fish.enable = true;
-    hyprland.enable = true;
-    hyprlock.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
-  };
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     download-buffer-size = 104857600;
