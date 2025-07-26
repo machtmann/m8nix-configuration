@@ -1,23 +1,20 @@
 { config, lib, pkgs, ... }:{
 
   imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
     ./disko-config.nix
+    ./hardware-configuration.nix
     ./system/packages.nix
   ];
 
   boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    kernelPackages = pkgs.linuxPackages_latest;
     blacklistedKernelModules = [ "nouveau" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot.enable = true;
     plymouth.enable = true;
   };
 
-  networking.hostName = "m8nix-mobile";
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "Europe/Amsterdam";
+  home-manager = { users.m8man = import ./home/home.nix; };
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -25,30 +22,36 @@
     useXkbConfig = true;
   };
 
+  networking.hostName = "m8nix-mobile";
+  networking.networkmanager.enable = true;
+
   services = {
+    blueman.enable = true;
     displayManager = { sddm.enable = true; sddm.theme = "tokyo-night-sddm"; };
+    hypridle.enable = true;
+    libinput.enable = true;
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
+      pulse.enable = true;
+    };
+    openssh.enable = true;
+    printing.enable = true;
+    udisks2.enable = true;
     xserver = {
       enable = true;
       videoDrivers = [ "modesetting" ];
     };
   };
-  services.udisks2.enable = true;
-
-  services.printing.enable = true;
 
   # services.pulseaudio.enable = true;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-    jack.enable = true;
-  };
 
-  services.libinput.enable = true;
+  time.timeZone = "Europe/Amsterdam";
 
   users.users.m8man = {
     isNormalUser = true;
@@ -56,8 +59,6 @@
     shell = pkgs.fish;
     packages = with pkgs; [ tree ];
   };
-
-  home-manager = { users.m8man = import ./home/home.nix; };
 
   programs = {
     firefox.enable = true;
@@ -73,16 +74,9 @@
     };
   };
 
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     download-buffer-size = 104857600;
-  };
-
-  services = {
-    openssh.enable = true;
-    blueman.enable = true;
-    hypridle.enable = true;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
@@ -103,6 +97,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }
-
