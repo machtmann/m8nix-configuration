@@ -58,14 +58,19 @@
             };
 
             # lookup available extensions here https://nur.nix-community.org/repos/
-            extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-              darkreader
-              keepassxc-browser
-              ublock-origin
-              vimium
-            ] ++ [
-              pkgs.nur.repos.meain.firefox-addons.netflix-prime-auto-skip
-            ];
+            extensions.packages = let
+              ryceeAddons = with pkgs.nur.repos.rycee.firefox-addons; [
+                darkreader
+                keepassxc-browser
+                ublock-origin
+                vimium
+              ];
+
+              meainAddons = with pkgs.nur.repos.meain.firefox-addons; [
+                netflix-prime-auto-skip
+              ];
+            in
+              ryceeAddons ++ meainAddons;
           };
         };
       };
