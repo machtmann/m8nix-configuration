@@ -4,6 +4,7 @@
     ./disko-config.nix
     ./hardware-configuration.nix
     ./system/packages.nix
+    ./system/gpu.nix
   ];
 
   boot = {
@@ -44,10 +45,6 @@
     openssh.enable = true;
     printing.enable = true;
     udisks2.enable = true;
-    xserver = {
-      enable = true;
-      videoDrivers = [ "modesetting" ];
-    };
   };
 
   # services.pulseaudio.enable = true;
