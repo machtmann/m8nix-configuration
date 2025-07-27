@@ -52,6 +52,7 @@ in {
   ];
 
   programs = {
+    direnv.enable = true;
     firefox.enable = true;
     fish.enable = true;
     hyprland.enable = true;

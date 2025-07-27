@@ -112,6 +112,8 @@
       set --universal tide_vi_mode_icon_replace REPLACE
       set --universal tide_vi_mode_icon_visual VISUAL
 
+      set -g direnv_fish_mode eval_on_arrow
+
       set -x EDITOR nvim
       set -x LESS -R
       set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
