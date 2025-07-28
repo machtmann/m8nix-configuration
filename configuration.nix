@@ -60,8 +60,9 @@
   };
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
     download-buffer-size = 104857600;
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "root" "m8man" ];
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
