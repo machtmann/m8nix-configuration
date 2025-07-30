@@ -3,6 +3,7 @@
 let
   caelestia-cli = pkgs.callPackage ../modules/caelestia/cli.nix { };
   tokyo-night-sddm = pkgs.libsForQt5.callPackage ../modules/sddm/sddm.nix { };
+  nvtop = pkgs.callPackage ../modules/nvtop/nvtop.nix { };
 in {
 
   nixpkgs.config.allowUnfree = true;
@@ -34,6 +35,7 @@ in {
     neovim
     nh
     nix-output-monitor
+    nvtop
     secretspec
     wget
 
