@@ -26,7 +26,6 @@ in {
     cliphist
     devenv
     eza
-    fastfetch
     fish
     gcc
     git
