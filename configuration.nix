@@ -12,7 +12,36 @@
     kernelPackages = pkgs.linuxPackages_latest;
     loader.efi.canTouchEfiVariables = true;
     loader.systemd-boot.enable = true;
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      theme = "catppuccin-mocha";
+      themePackages = with pkgs; [
+        (catppuccin-plymouth.override {
+          variant = "mocha";
+        })
+      ];
+    };
+    consoleLogLevel = 3;
+    initrd = {
+      kernelModules = [ "i915" ];
+      supportedFilesystems = [ "ext4" "btrfs" "xfs" "vfat" ];
+      systemd = {
+        enable = true;
+        services."systemd-ask-password-plymouth" = {
+          wantedBy = [ "initrd.target" ];
+        };
+      };
+      verbose = false;
+    };
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=false"
+      "video=efifb:nobgrt"
+    ];
+    loader.timeout = 0;
   };
 
   fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
