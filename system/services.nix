@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+let
+  sddm-astronaut = pkgs.sddm-astronaut.override { embeddedTheme = "pixel_sakura"; };
+in {
+
   services = {
     auto-cpufreq = {
       enable = true;
@@ -14,6 +19,16 @@
       };
     };
     blueman.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      extraPackages = with pkgs; [
+        kdePackages.qtsvg
+        kdePackages.qtmultimedia
+        sddm-astronaut
+      ];
+      package = pkgs.kdePackages.sddm;
+      theme = "sddm-astronaut-theme";
+    };
     hypridle.enable = true;
     libinput.enable = true;
     logind = {

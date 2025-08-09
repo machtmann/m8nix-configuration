@@ -2,7 +2,6 @@
 
 let
   caelestia-cli = pkgs.callPackage ../modules/caelestia/cli.nix { };
-  tokyo-night-sddm = pkgs.libsForQt5.callPackage ../modules/sddm/sddm.nix { };
   nvtop = pkgs.callPackage ../modules/nvtop/nvtop.nix { };
 in {
 
@@ -17,8 +16,8 @@ in {
     discord
 
     # Rice
-    tokyo-night-sddm
     starship
+    sddm-astronaut
 
     # Tools
     alsa-lib
