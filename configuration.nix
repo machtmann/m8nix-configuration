@@ -3,8 +3,9 @@
   imports = [ # Include the results of the hardware scan.
     ./disko-config.nix
     ./hardware-configuration.nix
-    ./system/packages.nix
     ./system/gpu.nix
+    ./system/packages.nix
+    ./system/services.nix
   ];
 
   boot = {
@@ -57,45 +58,6 @@
   networking.hostName = "m8nix-mobile";
   networking.networkmanager.enable = true;
 
-  services = {
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
-    };
-    blueman.enable = true;
-    displayManager = { sddm.enable = true; sddm.theme = "tokyo-night-sddm"; };
-    hypridle.enable = true;
-    libinput.enable = true;
-    logind = {
-      lidSwitch = "poweroff";
-      lidSwitchExternalPower = "suspend-then-hibernate";
-      lidSwitchDocked = "ignore";
-    };
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      jack.enable = true;
-      pulse.enable = true;
-    };
-    openssh.enable = true;
-    printing.enable = true;
-    thermald.enable = true;
-    udisks2.enable = true;
-  };
-
-  # services.pulseaudio.enable = true;
   security.rtkit.enable = true;
 
   time.timeZone = "Europe/Amsterdam";
