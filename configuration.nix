@@ -29,10 +29,28 @@
   networking.networkmanager.enable = true;
 
   services = {
+    auto-cpufreq = {
+      enable = true;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
+      };
+    };
     blueman.enable = true;
     displayManager = { sddm.enable = true; sddm.theme = "tokyo-night-sddm"; };
     hypridle.enable = true;
     libinput.enable = true;
+    logind = {
+      lidSwitch = "poweroff";
+      lidSwitchExternalPower = "suspend-then-hibernate";
+      lidSwitchDocked = "ignore";
+    };
     pipewire = {
       enable = true;
       alsa = {
@@ -44,6 +62,7 @@
     };
     openssh.enable = true;
     printing.enable = true;
+    thermald.enable = true;
     udisks2.enable = true;
   };
 
@@ -64,6 +83,8 @@
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "m8man" ];
   };
+
+  powerManagement.enable = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
